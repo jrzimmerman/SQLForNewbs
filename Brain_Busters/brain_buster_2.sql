@@ -11,14 +11,13 @@ GROUP BY 1;
 
 # which rating is most prevalent in each store
 SELECT 
+    f.rating,
     i.store_id,
-    count(f.film_id),
-    f.rating
-FROM film as f
-LEFT JOIN inventory as i
-ON f.film_id = i.film_id
-GROUP BY i.store_id, rating
-ORDER BY 2 DESC;
+    count(f.film_id)
+FROM film as f, inventory as i
+WHERE f.film_id = i.film_id
+GROUP BY f.rating, i.store_id
+ORDER BY 1, 3 DESC;
 
 # Which rating is most prevalent in each price
 SELECT count(film_id), rating, rental_rate
